@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>To My Forever Love 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --pink1:#ffe0ec; --pink2:#ffc3a0; --rose:#d81b60; --deep:#b91554; --text:#333; --soft:#fff5f8;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh;
+      display:flex; align-items:center; justify-content:center;
+      font-family:"Segoe UI", system-ui, -apple-system, sans-serif;
+      background:linear-gradient(to right,var(--pink1),var(--pink2));
+      overflow:hidden;
+    }
+    .card{
+      background:#fff; border-radius:18px; padding:26px; width:92%; max-width:760px;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      position:relative; animation:fadeIn .8s ease;
+      text-align:center;
+    }
+
+    /* Slideshow (front page) */
+    .slideshow{
+      width:100%; height:340px; margin-bottom:16px; position:relative; overflow:hidden; border-radius:12px; background:var(--soft);
+    }
+    .slide{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+      opacity:0; transition:opacity 1s ease-in-out;
+    }
+    .slide.active{ opacity:1; }
+
+    /* Buttons */
+    .btn{
+      appearance:none; border:none; cursor:pointer; color:#fff; background:var(--rose);
+      padding:12px 16px; border-radius:12px; font-size:1rem;
+      box-shadow:0 8px 16px rgba(216,27,96,.25);
+      transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn:hover{ transform:translateY(-2px); box-shadow:0 12px 22px rgba(216,27,96,.28); background:var(--deep); }
+    .btn.secondary{ background:#ff7aa8; }
+    .btn.secondary:hover{ background:#ff5a95; }
+
+    /* Hidden content area */
+    .hidden{ display:none; }
+    .fade-in{ animation:fadeIn .6s ease; }
+    @keyframes fadeIn{ from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)} }
+
+    h1{ color:var(--rose); margin:14px 0 8px; }
+    .message{ color:var(--text); font-size:1.06rem; line-height:1.6; margin:12px 0 18px; }
+    .signature{ font-style:italic; color:#666; }
+
+    /* Floating hearts */
+    .floating-heart{
+      position:fixed; bottom:-24px; font-size:1.8rem; color:var(--rose);
+      animation:floatUp linear forwards; filter:drop-shadow(0 4px 6px rgba(0,0,0,.15)); z-index:0; opacity:.9;
+    }
+    @keyframes floatUp{
+      0%{ transform:translateY(0) scale(1); opacity:.9 }
+      100%{ transform:translateY(-115vh) scale(1.2); opacity:0 }
+    }
+
+    /* Modal (proposal) */
+    .backdrop{
+      position:fixed; inset:0; background:rgba(0,0,0,.45); display:none; align-items:center; justify-content:center; z-index:3;
+    }
+    .modal{
+      background:#fff; border-radius:16px; padding:22px; width:90%; max-width:560px; text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,.25); animation:fadeIn .35s ease;
+    }
+    .modal h2{ color:var(--rose); margin:0 0 10px; }
+    .modal p{ color:var(--text); margin:10px 0 18px; line-height:1.6; }
+    .actions{ display:flex; gap:10px; justify-content:center; }
+
+    /* Small tip text */
+    .hint{ font-size:.9rem; color:#555; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <!-- Put love-song.mp3 and photos (photo1.jpg, photo2.jpg, photo3.jpg) in the same folder as this HTML -->
+  <audio id="love-audio" src="c:\swathi\WhatsApp Audio 2025-11-08 at 07.23.06_526f83de.mp3" preload="auto" loop></audio>
+
+  <div class="card">
+    <!-- FRONT PAGE: only photos + music button -->
+    <div class="slideshow">
+      <img src="c:\swathi\WhatsApp Image 2025-11-08 at 11.45.21_8ba18f1c.jpg" class="slide active" alt="Moment 1">
+      <img src="c:\swathi\WhatsApp Image 2025-11-08 at 11.45.21_c7ea17a6.jpg" class="slide" alt="Moment 2">
+      <img src="c:\swathi\WhatsApp Image 2025-11-08 at 11.45.22_829ee957.jpg" class="slide" alt="Moment 3">
+    </div>
+
+    <button id="show-heart" class="btn">💖 Show My Heart</button>
+    <p class="hint">Tip: Click “Show My Heart” to reveal the message, proposal, and start the music.</p>
+
+    <!-- HIDDEN CONTENT: revealed by button -->
+    <div id="love-content" class="hidden">
+      <h1>To My Forever Love 💖</h1>
+      <p class="message">
+        My dearest love,Sabari Papa<br><br>
+        My love Sabari. I love you so much. Naan unnaiya romba kasta paduthu irukken.
+        Enakku enga amma appa tha mookiyam but antha aalavukku neeyum mookiyam.<br>
+        <br>Ennakku avalum mookiyam neeyum than mookiyam<br>
+        <br> nee solluva illa sabari athathiye pannu eppadiyavathu kalyanam pannikoo<br>
+        <br> nee en uriye daaa<br>
+        Every glance, every touch, every moment with you is a melody I never want to stop playing.<br><br>
+        I promise to stand by you, laugh with you, cry with you, and love you more deeply with every passing day.<br>
+        You are not just my husband — you are my home.<br><br>
+        Forever yours,<br>
+        <span class="signature">Swathi 💕</span>
+      </p>
+
+      <div style="display:flex; gap:10px; justify-content:center;">
+        <button id="proposal-btn" class="btn secondary">💍 Proposal</button>
+        <button id="more-hearts" class="btn">❤ More Hearts</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Proposal Modal -->
+  <div id="backdrop" class="backdrop">
+    <div class="modal">
+      <h2>My Heart’s Proposal 💍</h2>
+      <p>Sabari, will you keep choosing me — today, tomorrow, always? Let’s write our forever, hand in hand.</p>
+      <div class="actions">
+        <button id="yes-btn" class="btn">Yes, forever</button>
+        <button id="close-btn" class="btn secondary">Not now</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Elements
+    const audio = document.getElementById('love-audio');
+    const showHeart = document.getElementById('show-heart');
+    const loveContent = document.getElementById('love-content');
+    const proposalBtn = document.getElementById('proposal-btn');
+    const moreHeartsBtn = document.getElementById('more-hearts');
+    const backdrop = document.getElementById('backdrop');
+    const yesBtn = document.getElementById('yes-btn');
+    const closeBtn = document.getElementById('close-btn');
+
+    // Smooth audio start on user interaction
+    function startMusic() {
+      audio.volume = 0;
+      audio.play().catch(() => {/* waits for interaction; will succeed on click */});
+      let v = 0;
+      const fade = setInterval(() => {
+        v += 0.05;
+        audio.volume = Math.min(v, 1);
+        if (v >= 1) clearInterval(fade);
+      }, 120);
+    }
+
+    // Hearts
+    function launchHearts(count = 24) {
+      for (let i = 0; i < count; i++) {
+        const h = document.createElement('div');
+        h.className = 'floating-heart';
+        h.textContent = Math.random() > 0.25 ? '❤' : '💖';
+        h.style.left = Math.random() * 100 + 'vw';
+        h.style.animationDuration = 3 + Math.random() * 3 + 's';
+        h.style.color = Math.random() > 0.5 ? '#d81b60' : '#ff5a95';
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 6500);
+      }
+    }
+
+    // Reveal heart content
+    showHeart.addEventListener('click', () => {
+      loveContent.classList.remove('hidden');
+      loveContent.classList.add('fade-in');
+      startMusic();
+      launchHearts(30);
+    });
+
+    // Proposal modal
+    proposalBtn.addEventListener('click', () => {
+      backdrop.style.display = 'flex';
+      launchHearts(18);
+    });
+    closeBtn.addEventListener('click', () => {
+      backdrop.style.display = 'none';
+    });
+    yesBtn.addEventListener('click', () => {
+      backdrop.style.display = 'none';
+      launchHearts(40);
+    });
+
+    // Extra hearts
+    moreHeartsBtn.addEventListener('click', () => launchHearts(26));
+
+    // Slideshow rotation
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    setInterval(() => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 3000);
+  </script>
+</body>
+</html>
